@@ -7,7 +7,7 @@ export const Contador=()=>{
 
     const [valor2]=useState(valor)
 
-    const suma=()=>{("+")}
+    const suma=()=>{(valor+"+")}
 
     const resta=()=>{setValor(valor-1)}
 
