@@ -35,7 +35,7 @@ export const Contador=()=>{
             <table border={1}>
             {/* <h1>{valor}</h1> */}
              <input type="number" value={valor} /><br />
-             <input type="number" value={valor2}/><br />
+         
              <button type="button"  onClick={uno}>1</button>
              <button type="button"  onClick={dos}>2</button>
              <button type="button"  onClick={tres}>3</button>
