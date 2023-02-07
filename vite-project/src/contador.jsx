@@ -2,59 +2,113 @@ import { useState } from "react"
 import { Fragment } from "react"
 
 export const Contador=()=>{
-
-    const [valor,setValor]=useState("")
-
-    const [valor2]=useState(valor)
-
-    const suma=()=>{(valor+"+")}
-
-    const resta=()=>{setValor(valor-1)}
+  const [valor, setValor]=useState("");
+  const [valor1, setValor1]=useState("");
+  const [op, setOp]=useState("");
 
     
+  const Operador = (i) => {
+        if (op == "") {
+        setValor1(parseFloat(valor));
+        setOp(i.target.value);
+        setValor("");
+        } else {
+        setOp(i.target.value);
+        }
+    };
 
-    const igual=()=>{setValor("=")}
+    const Borrar = () => {
+       return(
+        setValor("")
+       )
+    }
 
-    const uno=()=>{setValor(valor+"1")}
-    
-    const dos=()=>{setValor(valor+"2")}
-    const tres=()=>{setValor(valor+"3")}
-    const cuatro=()=>{setValor(valor+"4")}
-    const cinco=()=>{setValor(valor+"5")}
-    const seis=()=>{setValor(valor+"6")}
-    const siete=()=>{setValor(valor+"7")}
-    const ocho=()=>{setValor(valor+"8")}
-    const nueve=()=>{setValor(valor+"9")}
-    const cero=()=>{setValor(valor+"0")}
+  const Res =()=>{
+        if(op == "+"){
+        setValor(parseFloat(valor) + valor1);
+        setOp("");
+        setValor1("");
+        }
+        if(op == "-"){
+        setValor(parseFloat(valor1) - valor);
+        setOp("");
+        setValor1("");
+        }
+        if(op == "/"){
+        setValor(parseFloat(valor1) / valor);
+        setOp("");
+        setValor1("");
+        }
+        if(op == "*"){
+        setValor(parseFloat(valor) * valor1);
+        setOp("");
+        setValor1("");
+        }
+    };
 
+  function Boton(props){
+        return(
+        <button class="btn btn-danger" onClick={() => setValor(valor + (props.numero))}>{props.numero}</button>
+        )
+    }; 
+
+  function BtnOpera(props){
+        return(
+        <button class="btn btn-danger" onClick={Operador} value={props.numero}>{props.numero}</button>
+        )
+    ;} 
+
+  function Resultado(props){
+        return(
+        <button class="btn btn-danger" onClick={Res} value={props.numero}>{props.numero}</button>
+        )
+    }; 
+
+    function Borrar1(props){
+        return(
+            <button class="btn btn-danger" onClick={Borrar} value={props.numero}>{props.numero}</button>
+        )
+    }
+
+  function Pantalla (){
+        return(
+        <input type="text" value={valor} />
+        )
+    };
     return(
         <Fragment>
+            <div class="contador">
+                <table>
+                    <tr>
+                    <Pantalla/>
+                    </tr>       
+                    <tr>
+                    <Boton numero="9"/>
+                    <Boton numero="8"/>
+                    <Boton numero="7"/>
+                    <BtnOpera numero="+"/>
+                    </tr>
+                    <Boton numero="4"/>
+                    <Boton numero="5"/>
+                    <Boton numero="6"/>
+                    <BtnOpera numero="-"/>
+                    <tr>
+                    <Boton numero="1"/>
+                    <Boton numero="2"/>
+                    <Boton numero="3"/>
+                    <BtnOpera numero="*"/>
+                    </tr>
+                    <tr>
+                    <Boton numero="0"/>
+                    <BtnOpera numero="/"/>
+                    <Resultado numero="="/>
+                    <Borrar1 numero="C"/>
+                    </tr>
+                </table>
+            </div>
+            
 
-            
-            <h1>CALCULADORA</h1>
-            <table border={1}>
-            {/* <h1>{valor}</h1> */}
-             <input type="number" value={valor} /><br />
-         
-             <button type="button"  onClick={uno}>1</button>
-             <button type="button"  onClick={dos}>2</button>
-             <button type="button"  onClick={tres}>3</button>
-             <button type="button"  onClick={cuatro}>4</button><br /><br />
-             <button type="button"  onClick={cinco}>5</button>
-             <button type="button"  onClick={seis}>6</button>
-             <button type="button"  onClick={siete}>7</button>
-             <button type="button"  onClick={ocho}>8</button><br /><br />
-             <button type="button"  onClick={nueve}>9</button>
-             <button type="button"  onClick={cero}>0</button>
-             <button type="button"  onClick={suma}>+</button>
-             <button type="button" onClick={igual}>=</button>
-            </table> 
-
-            
-            
-            
         </Fragment>
     )
 }
-
 export default Contador
