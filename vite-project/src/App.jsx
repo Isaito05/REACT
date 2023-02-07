@@ -4,23 +4,57 @@ import './App.css'
 
 function App() {
   
-  const [valor, setValor]=useState("")
+  const [valor, setValor]=useState("");
+  const [valor1, setValor1]=useState("");
+  const [op, setOp]=useState("");
 
-  var Suma =(op)=>{
-    return(
-      op = "+"
-    )
-  }
-
-  const Resultado = () => {
-    if(Suma = "+"){
-      setValor + valor
+  const Operador = (i) => {
+    if (op == "") {
+      setValor1(parseFloat(valor));
+      setOp(i.target.value);
+      setValor("");
+    } else {
+      setOp(i.target.value);
     }
+  };
+
+  const Res =()=>{
+    if(op == "+"){
+      setValor(parseFloat(valor) + valor1);
+    }
+    if(op == "-"){
+      setValor(parseFloat(valor1) - valor);
+    }
+    if(op == "/"){
+      setValor(parseFloat(valor1) / valor);
+    }
+    if(op == "*"){
+      setValor(parseFloat(valor) * valor1);
+    }
+    
   }
+
+  // const Resultado = () => {
+  //   if(Suma = "+"){
+  //     setValor + valor
+  //   }
+  // }
 
   function Boton(props){
     return(
       <button class="btn btn-danger" onClick={() => setValor(valor + (props.numero))}>{props.numero}</button>
+    )
+  } 
+
+  function BtnOpera(props){
+    return(
+      <button class="btn btn-danger" onClick={Operador} value={props.numero}>{props.numero}</button>
+    )
+  } 
+
+  function Resultado(props){
+    return(
+      <button class="btn btn-danger" onClick={Res} value={props.numero}>{props.numero}</button>
     )
   } 
 
@@ -29,38 +63,36 @@ function App() {
       <input type="text" value={valor} />
     )
   }
+
+  
   
 
   return (
     <>
-      {/* <Contador/> */}
       <table>
         <tr>
           <Pantalla/>
-
         </tr>       
         <tr>
           <Boton numero="9"/>
           <Boton numero="8"/>
           <Boton numero="7"/>
-          <Boton numero="+"><Suma/>+</Boton>
+          <BtnOpera numero="+"/>
         </tr>
           <Boton numero="4"/>
           <Boton numero="5"/>
           <Boton numero="6"/>
-          <Boton numero="-"/>
-          {/* <button><Operador/> * </button> */}
-
+          <BtnOpera numero="-"/>
         <tr>
           <Boton numero="1"/>
           <Boton numero="2"/>
           <Boton numero="3"/>
-          <Boton numero="*"/>
+          <BtnOpera numero="*"/>
         </tr>
         <tr>
-        <Boton numero="0"/>
-        <Boton numero="/"/>
-        <button class="btn btn-danger"><Resultado/> = </button>
+          <Boton numero="0"/>
+          <BtnOpera numero="/"/>
+          <Resultado numero="="/>
         </tr>
       </table>
       
